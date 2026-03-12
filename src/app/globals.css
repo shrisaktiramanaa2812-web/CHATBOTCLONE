@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  body {
+    @apply bg-black text-white h-screen overflow-hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer components {
+  .chat-container {
+    @apply flex flex-col h-screen max-w-2xl mx-auto bg-black border-x border-gray-800;
+  }
+
+  .chat-header {
+    @apply p-4 bg-gray-900 border-b border-gray-800 backdrop-blur-lg;
+  }
+
+  .header-content {
+    @apply flex items-center justify-between;
+  }
+
+  .header-right {
+    @apply flex items-center gap-3;
+  }
+
+  .chat-title {
+    @apply text-lg font-semibold text-white;
+  }
+
+  .chat-status {
+    @apply text-xs text-green-500 font-medium;
+  }
+
+  .model-selector {
+    @apply bg-gray-800 border border-gray-700 text-white px-3 py-1.5 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 outline-none;
+  }
+
+  .model-selector:hover {
+    @apply border-blue-500 bg-gray-700;
+  }
+
+  .model-selector:focus {
+    @apply border-blue-500 ring-2 ring-blue-500/20;
+  }
+
+  .chat-messages {
+    @apply flex-1 overflow-y-auto p-5 scroll-smooth;
+  }
+
+  .chat-messages::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+
+  .chat-messages::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .chat-messages::-webkit-scrollbar-thumb {
+    @apply bg-gray-600 rounded-sm;
+  }
+
+  .message {
+    @apply flex mb-6 animate-fadeIn;
+  }
+
+  @keyframes fadeIn {
+    from {
+      @apply opacity-0 translate-y-2.5;
+    }
+    to {
+      @apply opacity-100 translate-y-0;
+    }
+  }
+
+  .ai-message {
+    @apply justify-start;
+  }
+
+  .user-message {
+    @apply justify-end;
+  }
+
+  .message-avatar {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold mr-3 flex-shrink-0;
+  }
+
+  .ai-message .message-avatar {
+    @apply bg-gradient-to-br from-green-500 to-green-600 text-white;
+  }
+
+  .user-message .message-avatar {
+    @apply bg-gradient-to-br from-blue-500 to-blue-600 text-white order-2 ml-3 mr-0;
+  }
+
+  .message-content {
+    @apply max-w-[70%] flex flex-col;
+  }
+
+  .user-message .message-content {
+    @apply items-end;
+  }
+
+  .message-bubble {
+    @apply p-3 rounded-xl break-words relative;
+  }
+
+  .ai-message .message-bubble {
+    @apply bg-gray-800 border border-gray-700 text-white rounded-bl-sm;
+  }
+
+  .user-message .message-bubble {
+    @apply bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-br-sm;
+  }
+
+  .message-text {
+    @apply text-sm leading-relaxed whitespace-pre-wrap;
+  }
+
+  .message-time {
+    @apply text-xs text-gray-500 mt-1 opacity-70;
+  }
+
+  .user-message .message-time {
+    @apply text-right;
+  }
+
+  .chat-input-container {
+    @apply p-5 bg-gray-900 border-t border-gray-800;
+  }
+
+  .input-wrapper {
+    @apply flex items-end gap-3 max-w-full bg-gray-800 border border-gray-700 rounded-full px-4 py-3 transition-all duration-200;
+  }
+
+  .input-wrapper:focus-within {
+    @apply border-blue-500;
+  }
+
+  .message-input {
+    @apply flex-1 bg-transparent border-none outline-none text-white text-sm leading-relaxed resize-none min-h-5 max-h-[120px] font-inherit;
+  }
+
+  .message-input::placeholder {
+    @apply text-gray-500;
+  }
+
+  .send-button {
+    @apply w-9 h-9 rounded-full border-none bg-gradient-to-br from-blue-500 to-blue-600 text-white cursor-pointer flex items-center justify-center transition-all duration-200 flex-shrink-0;
+  }
+
+  .send-button:hover:not(:disabled) {
+    @apply scale-105 shadow-lg shadow-blue-500/30;
+  }
+
+  .send-button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .send-button:active:not(:disabled) {
+    @apply scale-95;
+  }
+
+  .typing-indicator {
+    @apply hidden items-center p-3 mb-6;
+  }
+
+  .typing-indicator.active {
+    @apply flex;
+  }
+
+  .typing-dots {
+    @apply flex gap-1;
+  }
+
+  .typing-dot {
+    @apply w-2 h-2 rounded-full bg-gray-500;
+    animation: typing 1.4s infinite ease-in-out;
+  }
+
+  .typing-dot:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+
+  @keyframes typing {
+    0%, 80%, 100% {
+      @apply scale-80 opacity-50;
+    }
+    40% {
+      @apply scale-100 opacity-100;
+    }
+  }
+
+  .system-message {
+    @apply text-center text-gray-500 text-xs my-4 italic;
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    @apply border-x-0;
+  }
+  
+  .message-content {
+    @apply max-w-[85%];
+  }
+  
+  .chat-messages {
+    @apply p-4;
+  }
+  
+  .chat-input-container {
+    @apply p-4;
+  }
+}
