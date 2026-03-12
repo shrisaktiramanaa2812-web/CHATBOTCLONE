@@ -1,4 +1,4 @@
-const API_KEY = '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'
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY || 'your_api_key_here'
 const BASE_URL = 'https://openrouter.ai/api/v1/chat/completions'
 
 const modelMapping = {
